@@ -1,1 +1,8 @@
 .DS_Store
+bootstrap.zip
+.terraform.*
+terraform.*
+terraform-*
+LICENSE.txt
+node_modules
+index.js

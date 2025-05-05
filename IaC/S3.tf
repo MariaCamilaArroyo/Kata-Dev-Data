@@ -1,6 +1,17 @@
 resource "aws_s3_bucket" "staging_campaigns" {
   bucket = "staging-campaigns-bucket"
+  force_destroy = false
 }
+
+resource "aws_s3_bucket_public_access_block" "staging_campaigns_public_access_block" {
+  bucket = aws_s3_bucket.staging_campaigns.bucket
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+
 
 resource "aws_s3_object" "campaigns_folder" {
   bucket = aws_s3_bucket.staging_campaigns.bucket
@@ -10,26 +21,4 @@ resource "aws_s3_object" "campaigns_folder" {
 resource "aws_s3_object" "errors_folder" {
   bucket = aws_s3_bucket.staging_campaigns.bucket
   key    = "errors/"
-}
-
-resource "aws_s3_bucket_policy" "staging_campaigns_policy" {
-  bucket = aws_s3_bucket.staging_campaigns.bucket
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject",
-          "s3:PutObject"
-        ]
-        Resource = [
-          "arn:aws:s3:::staging-campaigns-bucket/campaigns/*",
-          "arn:aws:s3:::staging-campaigns-bucket/errors/*"
-        ]
-        Principal = "*"
-      }
-    ]
-  })
 }

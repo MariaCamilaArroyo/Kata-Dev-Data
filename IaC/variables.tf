@@ -3,10 +3,15 @@ variable "region" {
 }
 
 variable "db_username" {
-  default = "admin"
+  default = "adminuser"
 }
 
 variable "db_password" {
-  description = "RDS DB password"
-  sensitive   = true
+  default = "Ch4nG3m3"
+}
+
+variable "cron_expression" {
+  description = "Expresión CRON para ejecución automática del batch"
+  type        = string
+  default     = "cron(0 */2 * * ? *)"
 }

@@ -11,6 +11,7 @@ const pool = new Pool({
 export async function insertCampaigns(data: any[]) {
     const client = await pool.connect();
     try {
+        console.log('---->>> entra a db')
         await client.query('BEGIN');
         for (const campaign of data) {
             await client.query(
@@ -24,6 +25,8 @@ export async function insertCampaigns(data: any[]) {
                 ]
             );
         }
+        console.log('---->>> termina')
+
         await client.query('COMMIT');
     } catch (err) {
         await client.query('ROLLBACK');

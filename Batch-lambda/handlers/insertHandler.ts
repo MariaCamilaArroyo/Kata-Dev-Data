@@ -6,11 +6,14 @@ const BUCKET_NAME = 'staging-campaigns-bucket';
 const ERRORS_PREFIX = 'errors/rds/';
 
 export async function handleS3InsertExecution(event: S3Event): Promise<void> {
+  console.log('------->>> Entra al Handle')
   const record = event.Records[0];
   const bucket = record.s3.bucket.name;
   const key = record.s3.object.key;
 
   const data = await readJsonFromS3(bucket, key);
+  console.log('------->>> lee la data', data)
+
 
   try {
     await insertCampaigns(data);

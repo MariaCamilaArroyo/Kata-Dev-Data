@@ -9,6 +9,14 @@ const pool = new Pool({
 });
 
 export async function insertCampaigns(data: any[]) {
+    console.log({
+        PGHOST: process.env.PGHOST,
+        PGUSER: process.env.PGUSER,
+        PGPASSWORD: process.env.PGPASSWORD,
+        PGDATABASE: process.env.PGDATABASE,
+        PGPORT: process.env.PGPORT
+      });
+      
     console.log('---->>> entra a db antes de connect')
     const client = await pool.connect();
     try {

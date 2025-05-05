@@ -15,3 +15,8 @@ variable "cron_expression" {
   type        = string
   default     = "cron(0 */2 * * ? *)"
 }
+
+variable "pg_host" {}
+variable "pg_user" {}
+variable "pg_password" {}
+variable "pg_database" {}

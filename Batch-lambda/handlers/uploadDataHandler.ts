@@ -6,7 +6,7 @@ const INPUT_PREFIX = 'input/';
 const CAMPAIGNS_PREFIX = 'campaigns/';
 const ERRORS_PREFIX = 'errors/';
 
-export async function handleScheduledExecution(): Promise<void> {
+export async function uploadDataHandler(): Promise<void> {
   const files = await listJsonFiles(BUCKET_NAME, INPUT_PREFIX);
 
   if (files.length === 0) {

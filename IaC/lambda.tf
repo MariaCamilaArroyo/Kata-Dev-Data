@@ -10,7 +10,12 @@ resource "aws_lambda_function" "process_campaign_batch" {
 
   environment {
     variables = {
-      STAGE = "dev"
+      STAGE      = "dev", 
+      PGHOST     = var.pg_host
+      PGUSER     = var.pg_user
+      PGPASSWORD = var.pg_password
+      PGDATABASE = var.pg_database
+      PGPORT     = "5432"
     }
   }
 }

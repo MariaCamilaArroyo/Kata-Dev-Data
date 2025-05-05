@@ -6,3 +6,4 @@ terraform-*
 LICENSE.txt
 node_modules
 index.js
+terraform.tfvars

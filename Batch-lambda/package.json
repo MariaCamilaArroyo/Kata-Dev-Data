@@ -12,11 +12,13 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.802.0",
     "@aws-sdk/credential-provider-ini": "^3.799.0",
-    "axios": "^1.9.0"
+    "axios": "^1.9.0",
+    "pg": "^8.15.6"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
     "@types/node": "^22.15.3",
+    "@types/pg": "^8.11.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

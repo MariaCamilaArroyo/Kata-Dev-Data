@@ -4,7 +4,6 @@ import {
   ListObjectsV2Command,
   GetObjectCommand,
   PutObjectCommand,
-  CopyObjectCommand,
   DeleteObjectCommand
 } from '@aws-sdk/client-s3';
 import { Readable } from 'stream';
@@ -44,16 +43,19 @@ export async function uploadJsonToS3(bucket: string, key: string, data: any): Pr
 
 export async function uploadCsvToS3(bucket: string, key: string, data: any[]): Promise<void> {
   const header = 'client_name,card_amount,interest_rate,client_type\n';
-  const rows = data.map(item =>
-    `${item.nombre_cliente},${item.monto_tarjeta},${item.tasa_interes},${item.tipo_cliente}`
-  );
-  const csvContent = header + rows.join('\n');
+
+  const csvStream = Readable.from((function* () {
+    yield header;
+    for (const item of data) {
+      yield `${item.nombre_cliente},${item.monto_tarjeta},${item.tasa_interes},${item.tipo_cliente}\n`;
+    }
+  })());
 
   const command = new PutObjectCommand({
     Bucket: bucket,
     Key: key,
-    Body: csvContent,
-    ContentType: 'text/csv'
+    Body: csvStream,
+    ContentType: 'text/csv',
   });
 
   await s3.send(command);

@@ -16,29 +16,29 @@ export async function handleS3InsertExecution(event: S3Event) {
   const s3Stream = await getS3Stream(bucket, key);
   const rl = readline.createInterface({ input: s3Stream, crlfDelay: Infinity });
   console.log('Upload Data correctly');
-  const client = await getDbClient();
-  try {
-    let header: string | null = null;
-    let lines: string[] = [];
+  // const client = await getDbClient();
+  // try {
+  //   let header: string | null = null;
+  //   let lines: string[] = [];
 
-    for await (const line of rl) {
-      if (!header) {
-        header = line;
-        continue;
-      }
+  //   for await (const line of rl) {
+  //     if (!header) {
+  //       header = line;
+  //       continue;
+  //     }
 
-      lines.push(line);
+  //     lines.push(line);
 
-      if (lines.length >= BATCH_SIZE) {
-        await insertCsvBatch(client, header, lines);
-        lines = [];
-      }
-    }
+  //     if (lines.length >= BATCH_SIZE) {
+  //       await insertCsvBatch(client, header, lines);
+  //       lines = [];
+  //     }
+  //   }
 
-    if (lines.length > 0 && header) {
-      await insertCsvBatch(client, header, lines);
-    }
-  } finally {
-    client.release();
-  }
+  //   if (lines.length > 0 && header) {
+  //     await insertCsvBatch(client, header, lines);
+  //   }
+  // } finally {
+  //   client.release();
+  // }
 }

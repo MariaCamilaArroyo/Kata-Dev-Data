@@ -6,7 +6,7 @@ const pool = new Pool({
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
     port: parseInt(process.env.PGPORT || '5432'),
-    connectionTimeoutMillis: 3000,
+    
 });
 
 export async function insertCampaigns(data: any[]) {
@@ -16,15 +16,16 @@ export async function insertCampaigns(data: any[]) {
         PGPASSWORD: process.env.PGPASSWORD,
         PGDATABASE: process.env.PGDATABASE,
         PGPORT: process.env.PGPORT
-    });
-
-    console.log('---->>> entra a db antes de connect')
+      });
+      
+    console.log('---->>> entra a db antes de connect');
+    console.time('db_connect');
     const client = await pool.connect();
+    console.timeEnd('db_connect');
+
     try {
         console.log('---->>> entra a db')
-        console.time('db_connect');
-        const client = await pool.connect();
-        console.timeEnd('db_connect');
+        await client.query('BEGIN');
         for (const campaign of data) {
             await client.query(
                 `INSERT INTO campaigns (client_name, card_amount, interest_rate, client_type) 

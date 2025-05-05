@@ -15,7 +15,6 @@ const s3 = new S3Client({
 
 const uploadCampaignData = async () => {
   try {
-    console.log(`Consultando API: ${API_URL}`);
     const response = await axios.get(API_URL);
     const data = response.data;
 
@@ -24,7 +23,6 @@ const uploadCampaignData = async () => {
     const localPath = path.join(__dirname, 'temp', fileName);
 
     writeFileSync(localPath, JSON.stringify(data, null, 2));
-    console.log(`Archivo generado: temp/${fileName}`);
 
     const fileContent = readFileSync(localPath);
 
@@ -36,12 +34,11 @@ const uploadCampaignData = async () => {
     });
 
     await s3.send(command);
-    console.log(`Archivo subido a S3: s3://${BUCKET_NAME}/input/${fileName}`);
+    console.log(`File uploades: s3://${BUCKET_NAME}/input/${fileName}`);
 
-    // unlinkSync(localPath);
-    console.log(`Archivo local eliminado: temp/${fileName}`);
+    unlinkSync(localPath);
   } catch (error: any) {
-    console.error(`Error en el proceso: ${error.message}`);
+    console.error(`There was an error: ${error.message}`);
   }
 };
 

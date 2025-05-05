@@ -11,7 +11,7 @@ export async function uploadDataHandler(): Promise<void> {
   const files = await listJsonFiles(BUCKET_NAME, INPUT_PREFIX);
 
   if (files.length === 0) {
-    console.log('No hay archivos para procesar.');
+    console.log('There is no files to proccess.');
     return;
   }
 

@@ -16,6 +16,7 @@ resource "aws_lambda_function" "process_campaign_batch" {
       PGPASSWORD = var.pg_password
       PGDATABASE = var.pg_database
       PGPORT     = "5432"
+      REDIS_URL  = "redis://${aws_elasticache_cluster.redis.cache_nodes[0].address}:6379"
     }
   }
 }

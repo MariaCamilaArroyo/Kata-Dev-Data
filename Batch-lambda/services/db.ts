@@ -19,9 +19,9 @@ export async function insertCampaigns(data: any[]) {
       });
       
     console.log('---->>> entra a db antes de connect');
+    const client = await pool.connect();
     try {
         console.time('db_connect');
-        const client = await pool.connect();
         console.timeEnd('db_connect');
         console.log('---->>> entra a db')
         await client.query('BEGIN');

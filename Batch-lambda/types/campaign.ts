@@ -1,7 +1,7 @@
 export interface Campaign {
-    id: string;
-    name: string;
-    status?: string;
-    createdAt?: string;
+  monto_tarjeta: string;
+  nombre_cliente: string;
+  status: string;
+  tipo_cliente: string;
   }
   

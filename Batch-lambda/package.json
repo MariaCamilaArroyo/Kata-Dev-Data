@@ -13,7 +13,8 @@
     "@aws-sdk/client-s3": "^3.802.0",
     "@aws-sdk/credential-provider-ini": "^3.799.0",
     "axios": "^1.9.0",
-    "pg": "^8.15.6"
+    "pg": "^8.15.6",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",

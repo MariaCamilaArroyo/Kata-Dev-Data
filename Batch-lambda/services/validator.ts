@@ -1,6 +1,6 @@
-import { Campaign } from '../types/campaign';
+import { campaignSchema, Campaign } from '../types/campaign';
 
-export function validateCampaignData(data: any[]): {
+export function validateCampaignData(data: unknown[]): {
   valid: Campaign[],
   invalid: any[]
 } {
@@ -8,8 +8,9 @@ export function validateCampaignData(data: any[]): {
   const invalid: any[] = [];
 
   for (const item of data) {
-    if (item.id && item.name && typeof item.name === 'string') {
-      valid.push(item as Campaign);
+    const result = campaignSchema.safeParse(item);
+    if (result.success) {
+      valid.push(result.data);
     } else {
       invalid.push(item);
     }

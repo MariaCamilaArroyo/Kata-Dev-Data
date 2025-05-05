@@ -1,6 +1,6 @@
 import { S3Event, ScheduledEvent } from 'aws-lambda';
 import { uploadDataHandler } from './handlers/uploadDataHandler';
-import { handleS3InsertExecution } from './handlers/insertHandler';
+import { handleS3InsertExecution } from './handlers/handleS3InsertExecution';
 
 export const handler = async (event: S3Event | ScheduledEvent) => {
   if ('source' in event && event.source === 'aws.events') {

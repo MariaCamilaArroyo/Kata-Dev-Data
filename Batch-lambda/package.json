@@ -15,6 +15,7 @@
     "axios": "^1.9.0",
     "json2csv": "^6.0.0-alpha.2",
     "pg": "^8.15.6",
+    "pg-copy-streams": "^6.0.6",
     "zod": "^3.24.4"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "@types/json2csv": "^5.0.7",
     "@types/node": "^22.15.3",
     "@types/pg": "^8.11.14",
+    "@types/pg-copy-streams": "^1.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

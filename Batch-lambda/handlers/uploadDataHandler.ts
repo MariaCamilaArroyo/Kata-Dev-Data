@@ -1,3 +1,4 @@
+
 import { listJsonFiles, readJsonFromS3, uploadJsonToS3, uploadCsvToS3, deleteS3Object } from '../services/s3';
 import { validateCampaignData } from '../services/validator';
 
@@ -15,15 +16,12 @@ export async function uploadDataHandler(): Promise<void> {
   }
 
   for (const fileKey of files) {
-    console.log(`📂 Procesando archivo: ${fileKey}`);
-
     const data = await readJsonFromS3(BUCKET_NAME, fileKey);
     const { valid, invalid } = validateCampaignData(data);
 
     if (invalid.length > 0) {
       const errorFileKey = fileKey.replace(INPUT_PREFIX, ERRORS_PREFIX);
       await uploadJsonToS3(BUCKET_NAME, errorFileKey, invalid);
-      console.warn(`⚠️ ${invalid.length} registros inválidos exportados a: ${errorFileKey}`);
     }
 
     if (valid.length > 0) {
@@ -32,10 +30,8 @@ export async function uploadDataHandler(): Promise<void> {
         .replace(/\.json$/i, '.csv');
 
       await uploadCsvToS3(BUCKET_NAME, csvFileKey, valid);
-      console.log(`✅ ${valid.length} registros válidos exportados a: ${csvFileKey}`);
     }
 
     await deleteS3Object(BUCKET_NAME, fileKey);
-    console.log(`🗑️ Archivo original eliminado: ${fileKey}`);
   }
 }

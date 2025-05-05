@@ -26,6 +26,12 @@ jobs:
       working-directory: Batch-lambda
       run: npx tsc
 
+    - name: Copy dependencies into dist
+      working-directory: Batch-lambda
+      run: |
+        cp -R node_modules dist/node_modules
+        cp package.json dist/package.json
+
     - name: Zip compiled Lambda
       working-directory: Batch-lambda
       run: |

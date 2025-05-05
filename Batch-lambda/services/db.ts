@@ -9,6 +9,7 @@ const pool = new Pool({
 });
 
 export async function insertCampaigns(data: any[]) {
+    console.log('---->>> entra a db antes de connect')
     const client = await pool.connect();
     try {
         console.log('---->>> entra a db')

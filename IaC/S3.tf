@@ -22,3 +22,8 @@ resource "aws_s3_object" "errors_folder" {
   bucket = aws_s3_bucket.staging_campaigns.bucket
   key    = "errors/"
 }
+
+resource "aws_s3_object" "input_folder" {
+  bucket = aws_s3_bucket.staging_campaigns.bucket
+  key    = "input/"
+}

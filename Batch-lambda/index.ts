@@ -13,5 +13,5 @@ export const handler = async (event: S3Event | ScheduledEvent) => {
     return;
   }
   await uploadDataHandler();
-  console.log('Evento no reconocido');
+  console.log('Proceso ejecutado correctamente');
 };

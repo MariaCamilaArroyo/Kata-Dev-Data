@@ -15,9 +15,8 @@ export async function handleS3InsertExecution(event: S3Event) {
 
   const s3Stream = await getS3Stream(bucket, key);
   const rl = readline.createInterface({ input: s3Stream, crlfDelay: Infinity });
-  console.log('----->>>getDbClient before')
+  console.log('Upload Data correctly');
   const client = await getDbClient();
-  console.log('----->>>getDbClient after')
   try {
     let header: string | null = null;
     let lines: string[] = [];

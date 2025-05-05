@@ -38,7 +38,7 @@ const uploadCampaignData = async () => {
     await s3.send(command);
     console.log(`Archivo subido a S3: s3://${BUCKET_NAME}/input/${fileName}`);
 
-    unlinkSync(localPath);
+    // unlinkSync(localPath);
     console.log(`Archivo local eliminado: temp/${fileName}`);
   } catch (error: any) {
     console.error(`Error en el proceso: ${error.message}`);
